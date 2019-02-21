@@ -94,8 +94,8 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
       }
 
       // do we have an authorization code?
-      if (array_key_exists('authorization_code', $values) && $values['authorization_code']) {
-        // yes, store it
+      if ($exactOL->getAuthorizationCode()) {
+        // yes, don't do anything
         $exactOL->setAuthorizationCode($values['authorization_code']);
       }
       else {

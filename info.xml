@@ -1,26 +1,23 @@
 <?xml version="1.0"?>
 <extension key="eu.businessandcode.exactonline" type="module">
   <file>exactonline</file>
-  <name>FIXME</name>
-  <description>FIXME</description>
+  <name>Exact Online CiviCRM Helper Extension</name>
+  <description>Connects to Exact Online using the API</description>
   <license>AGPL-3.0</license>
   <maintainer>
     <author>Alain Benbassat</author>
     <email>alain@businessandcode.eu</email>
   </maintainer>
   <urls>
-    <url desc="Main Extension Page">http://FIXME</url>
-    <url desc="Documentation">http://FIXME</url>
-    <url desc="Support">http://FIXME</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
-  <releaseDate>2018-11-06</releaseDate>
-  <version>1.0</version>
-  <develStage>alpha</develStage>
+  <releaseDate>2019-02-21</releaseDate>
+  <version>1.1</version>
+  <develStage>Stable</develStage>
   <compatibility>
-    <ver>4.7</ver>
+    <ver>4.7 5+</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
+  <comments></comments>
   <civix>
     <namespace>CRM/Exactonline</namespace>
   </civix>
