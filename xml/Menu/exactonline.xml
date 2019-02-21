@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/exactonline/settings</path>
+    <page_callback>CRM_Exactonline_Form_ExactSettings</page_callback>
+    <title>ExactSettings</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+  <item>
+    <path>civicrm/exactonline/callback</path>
+    <page_callback>CRM_Exactonline_Page_Callback</page_callback>
+    <title>Callback</title>
+    <access_arguments>*always allow*</access_arguments>
+  </item>
+  <item>
+    <path>civicrm/exactonline/settings-test</path>
+    <page_callback>CRM_Exactonline_Page_TestSettings</page_callback>
+    <title>TestSettings</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
