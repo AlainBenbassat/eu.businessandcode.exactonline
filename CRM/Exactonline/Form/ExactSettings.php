@@ -96,7 +96,6 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
       // do we have an authorization code?
       if ($exactOL->getAuthorizationCode()) {
         // yes, don't do anything
-        $exactOL->setAuthorizationCode($values['authorization_code']);
       }
       else {
         // no, redirect to Exact Online
@@ -106,7 +105,7 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
 
       // test the settings?
       if (array_key_exists('_qf_ExactSettings_done', $values)) {
-        CRM_Utils_System::redirect('/civicrm/exactonline/settings-test');
+        CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/exactonline/settings-test', 'reset=1'));
       }
     }
 

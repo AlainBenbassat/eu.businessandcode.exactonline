@@ -21,7 +21,7 @@ class CRM_Exactonline_Utils {
 
     // set authorize callback url
     global $base_url;
-    $this->exactConnection->setRedirectUrl($base_url . '/civicrm/exactonline/callback');
+    $this->exactConnection->setRedirectUrl($base_url . CRM_Utils_System::url('/civicrm/exactonline/callback', 'reset=1'));
 
     // set refresh token callback
     $this->exactConnection->setTokenUpdateCallback('CRM_Exactonline_Utils::exactTokenUpdateCallback');

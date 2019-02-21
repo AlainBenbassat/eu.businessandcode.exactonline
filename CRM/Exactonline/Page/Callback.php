@@ -17,7 +17,7 @@ class CRM_Exactonline_Page_Callback extends CRM_Core_Page {
     }
 
     // return to the settings page
-    CRM_Utils_System::redirect('/civicrm/exactonline/settings');
+    CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/exactonline/settings', 'reset=1'));
 
     parent::run();
   }
