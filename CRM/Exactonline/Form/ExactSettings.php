@@ -31,6 +31,9 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
     $this->add('text', 'division', 'Division', NULL, TRUE);
     $elements[] = 'division';
 
+    $this->addElement('checkbox', 'force_login', 'Login forceren');
+    $elements[] = 'force_login';
+
     $this->addElement('checkbox', 'clear_settings', 'WIS ALLE GEGEVENS<br>(client id, client secret, authorisatiecode, access token... worden gewist uit CiviCRM)');
     $elements[] = 'clear_settings';
 
@@ -77,6 +80,11 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
 
       CRM_Core_Session::setStatus('De Exact Online gegevens zijn gewist.', 'Succes', 'success');
       CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/exactonline/settings', 'reset=1'));
+    }
+    elseif (array_key_exists('force_login', $values) && $values['force_login'] == 1) {
+      // force login in Exact Online
+      $exactOL->forceLogin();
+      CRM_Utils_System::civiExit();
     }
     else {
       // save the values

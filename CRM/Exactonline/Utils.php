@@ -144,6 +144,12 @@ class CRM_Exactonline_Utils {
    *
    ***********************************************/
 
+  public function forceLogin() {
+    $authUrl = $this->exactConnection->getAuthUrl() . '&force_login=1';
+    header('Location: ' . $authUrl, TRUE, 303);
+    exit;
+  }
+
   public static function exactTokenUpdateCallback(\Picqer\Financials\Exact\Connection $connection) {
     // callback is called when tokens and expire time needs to be saved
     $eol = new CRM_Exactonline_Utils();
