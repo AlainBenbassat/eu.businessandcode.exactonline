@@ -82,6 +82,12 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
       CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/exactonline/settings', 'reset=1'));
     }
     elseif (array_key_exists('force_login', $values) && $values['force_login'] == 1) {
+      // clear some fields
+      $exactOL->setAuthorizationCode('');
+      $exactOL->setAccessToken('');
+      $exactOL->setExpiresIn('');
+      $exactOL->setRefreshToken('');
+
       // force login in Exact Online
       $exactOL->forceLogin();
       CRM_Utils_System::civiExit();
