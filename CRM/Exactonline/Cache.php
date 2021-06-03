@@ -28,14 +28,10 @@ class CRM_Exactonline_Cache {
 
   public static function set($name, $entity, $guid) {
     $sql = "
-      update
-        civicrm_exactonline_cache
-      set
-        exact_name = %1
-      and
-        exact_entity = %2
-      and
-        exact_guid = %3
+      insert into
+        civicrm_exactonline_cache (exact_name, exact_entity, exact_guid)
+      values
+        (%1, %2, %3)
     ";
     $sqlParams = [
       1 => [$name, 'String'],
