@@ -36,6 +36,20 @@ class CRM_Exactonline_Page_TestSettings extends CRM_Core_Page {
       CRM_Core_Session::setStatus($e->getMessage(), 'Exact configuratietest', 'error');
     }
 
+    $date = new DateTime();
+    $date->modify('-30 days');
+    $sqlParams[1] = [$date->getTimestamp(), 'Integer'];
+    $sql = "SELECT `response_status_code`, COUNT(*) as `total` FROM `civicrm_exactonline_log` WHERE `tstamp` >= %1 GROUP BY `response_status_code``";
+    $dao = \CRM_Core_DAO::executeQuery($sql, $sqlParams);
+    $statistics = [];
+    while($dao->fetch()) {
+      $statistics[] = array(
+        'status_code' => $dao->response_status_code,
+        'count' => $dao->total
+      );
+    }
+    $this->assign('statistics', $statistics);
+
     parent::run();
   }
 
