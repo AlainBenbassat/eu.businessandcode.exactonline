@@ -85,6 +85,10 @@
                 "rest",
                 "web service"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/7.3.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -154,6 +158,10 @@
             "keywords": [
                 "promise"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/promises/issues",
+                "source": "https://github.com/guzzle/promises/tree/1.4.1"
+            },
             "time": "2021-03-07T09:25:29+00:00"
         },
         {
@@ -225,6 +233,10 @@
                 "uri",
                 "url"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/1.8.2"
+            },
             "time": "2021-04-26T09:17:50+00:00"
         },
         {
@@ -233,12 +245,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CiviCooP/exact-php-client.git",
-                "reference": "4669343bf2fc2cc7009fd3e2b5e239d384dfc841"
+                "reference": "714a024529122e394211ee809d9cb920ff621427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CiviCooP/exact-php-client/zipball/4669343bf2fc2cc7009fd3e2b5e239d384dfc841",
-                "reference": "4669343bf2fc2cc7009fd3e2b5e239d384dfc841",
+                "url": "https://api.github.com/repos/CiviCooP/exact-php-client/zipball/714a024529122e394211ee809d9cb920ff621427",
+                "reference": "714a024529122e394211ee809d9cb920ff621427",
                 "shasum": ""
             },
             "require": {
@@ -276,9 +288,9 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/CiviCooP/exact-php-client/tree/v3.26.0"
+                "source": "https://github.com/CiviCooP/exact-php-client/tree/etion"
             },
-            "time": "2021-01-04T07:20:24+00:00"
+            "time": "2021-06-03T09:26:18+00:00"
         },
         {
             "name": "psr/http-client",
@@ -327,6 +339,9 @@
                 "psr",
                 "psr-18"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client/tree/master"
+            },
             "time": "2020-06-29T06:28:15+00:00"
         },
         {
@@ -377,6 +392,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -417,6 +435,10 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
             "time": "2019-03-08T08:55:37+00:00"
         }
     ],
@@ -430,5 +452,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
