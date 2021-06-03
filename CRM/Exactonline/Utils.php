@@ -48,6 +48,9 @@ class CRM_Exactonline_Utils {
 
     $this->exactOnlineDivision = $this->loadParam('ExactOnlineDivision', '');
     $this->exactConnection->setDivision($this->exactOnlineDivision);
+
+    // Insert the logging class.
+    $this->exactConnection->insertMiddleWare(\GuzzleHttp\Middleware::mapResponse('CRM_Exactonline_Logging::logResponse'));
   }
 
   /************************************************
