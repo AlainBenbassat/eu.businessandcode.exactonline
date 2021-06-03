@@ -55,6 +55,23 @@ function exactonline_civicrm_uninstall() {
  */
 function exactonline_civicrm_enable() {
   _exactonline_civix_civicrm_enable();
+
+  exactonline_create_cache_table_if_not_exists();
+}
+
+function exactonline_create_cache_table_if_not_exists() {
+  $sql = "
+    CREATE TABLE IF NOT EXISTS `civicrm_exactonline_cache` (
+      `id` int unsigned NOT NULL AUTO_INCREMENT,
+      `exact_name` varchar(255) NOT NULL,
+      `exact_entity` varchar(255) NOT NULL,
+      `exact_guid` varchar(255) NOT NULL,
+      `created_date` timestamp NULL  DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX (`exact_name`, `exact_entity`)
+    ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+  ";
+  CRM_Core_DAO::executeQuery($sql);
 }
 
 /**
