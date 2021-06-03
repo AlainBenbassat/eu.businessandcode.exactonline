@@ -1,0 +1,13 @@
+{
+    "name": "businessandcode/exactonline",
+    "description": "A CiviCRM extension for the Exactonline API",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/CiviCooP/exact-php-client"
+        }
+    ],
+    "require": {
+        "picqer/exact-php-client": "dev-etion"
+    }
+}
