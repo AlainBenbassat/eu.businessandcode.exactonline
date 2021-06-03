@@ -60,7 +60,7 @@ class CRM_Exactonline_Logging {
          `response_limit`,
          `response_remaning_limit`,
          `response_minutely_limit`,
-         `response_remaning_minutely_limit`,
+         `response_remaning_minutely_limit`
        ) VALUES (%1, %2, %3, %4, %5, %6, %7, %8, %9)", $sqlParams);
   }
 
