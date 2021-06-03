@@ -45,7 +45,23 @@ class CRM_Exactonline_Logging {
     $sqlParams[4] = [$response->getStatusCode(), 'String'];
     $sqlParams[5] = [$response_headers, 'String'];
 
-    \CRM_Core_DAO::executeQuery("INSERT INTO `civicrm_exactonline_log` (`tstamp`, `request_uri`, `request_headers`, `response_status_code`, `response_headers`) VALUES (%1, %2, %3, %4, %5)", $sqlParams);
+    $sqlParams[6] = [$response->getHeaderLine('X-RateLimit-Limit'), 'String'];
+    $sqlParams[7] = [$response->getHeaderLine('X-RateLimit-Remaining'), 'String'];
+    $sqlParams[8] = [$response->getHeaderLine('X-RateLimit-Minutely-Limit'), 'String'];
+    $sqlParams[9] = [$response->getHeaderLine('X-RateLimit-Minutely-Remaining'), 'String'];
+
+    \CRM_Core_DAO::executeQuery("
+        INSERT INTO `civicrm_exactonline_log` (
+         `tstamp`,
+         `request_uri`,
+         `request_headers`,
+         `response_status_code`,
+         `response_headers`,
+         `response_limit`,
+         `response_remaning_limit`,
+         `response_minutely_limit`,
+         `response_remaning_minutely_limit`,
+       ) VALUES (%1, %2, %3, %4, %5, %6, %7, %8, %9)", $sqlParams);
   }
 
   /**
