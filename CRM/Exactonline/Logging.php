@@ -19,6 +19,7 @@
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\MessageFormatter;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
 
 class CRM_Exactonline_Logging {
 
@@ -26,15 +27,14 @@ class CRM_Exactonline_Logging {
    * Log the response.
    *
    * @param \Psr\Http\Message\ResponseInterface $response
-   * @return \Psr\Http\Message\ResponseInterface
+   * @param \Psr\Http\Message\RequestInterface $request
    */
-  public static function logResponse(ResponseInterface $response) {
+  public static function logResponse(ResponseInterface $response, RequestInterface $request) {
     $headers = '';
     foreach ($response->getHeaders() as $name => $values) {
       $headers .= $name . ": " . implode(", ", $values) . "\r\n";
     }
-    \CRM_Core_Error::debug_log_message('Got response ('.$response->getStatusCode().') with headers: '.$headers);
-    return $response;
+    \CRM_Core_Error::debug_log_message('Got response ('.$response->getStatusCode().') '. $request->getUri() . ' with headers: '.$headers);
   }
 
   /**
@@ -53,14 +53,15 @@ class CRM_Exactonline_Logging {
       return function ($request, array $options) use ($handler) {
         return $handler($request, $options)->then(
           function ($response) use ($request) {
-            return self::logResponse($response);
+            self::logResponse($response, $request);
+            return $response;
           },
           function ($reason) use ($request) {
             $response = $reason instanceof RequestException
               ? $reason->getResponse()
               : null;
             if ($response) {
-              self::logResponse($response);
+              self::logResponse($response, $request);
             }
             return \GuzzleHttp\Promise\rejection_for($reason);
           }
