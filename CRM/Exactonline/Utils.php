@@ -1,7 +1,7 @@
 <?php
 
 // load the Exact php lib
-require __DIR__ . '/../../exact-php-client/vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 class CRM_Exactonline_Utils {
   public $exactConnection;
@@ -19,9 +19,7 @@ class CRM_Exactonline_Utils {
   public function __construct() {
     $this->exactConnection = new \Picqer\Financials\Exact\Connection();
 
-    // set authorize callback url
-    global $base_url;
-    $this->exactConnection->setRedirectUrl($base_url . CRM_Utils_System::url('/civicrm/exactonline/callback', 'reset=1'));
+    $this->exactConnection->setRedirectUrl(CRM_Utils_System::url('/civicrm/exactonline/callback', 'reset=1', TRUE));
 
     // set refresh token callback
     $this->exactConnection->setTokenUpdateCallback('CRM_Exactonline_Utils::exactTokenUpdateCallback');
