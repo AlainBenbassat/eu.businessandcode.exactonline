@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\MessageFormatter;
 use Psr\Http\Message\ResponseInterface;
 
 class CRM_Exactonline_Logging {
@@ -33,6 +35,38 @@ class CRM_Exactonline_Logging {
     }
     \CRM_Core_Error::debug_log_message('Got response ('.$response->getStatusCode().') with headers: '.$headers);
     return $response;
+  }
+
+  /**
+   * Middleware that logs requests, responses, and errors using a message
+   * formatter.
+   *
+   * @param LoggerInterface  $logger Logs messages.
+   * @param MessageFormatter $formatter Formatter used to create message strings.
+   * @param string           $logLevel Level at which to log requests.
+   *
+   * @return callable Returns a function that accepts the next handler.
+   */
+  public static function loggerMiddleware()
+  {
+    return function (callable $handler) {
+      return function ($request, array $options) use ($handler) {
+        return $handler($request, $options)->then(
+          function ($response) use ($request) {
+            return self::logResponse($response);
+          },
+          function ($reason) use ($request) {
+            $response = $reason instanceof RequestException
+              ? $reason->getResponse()
+              : null;
+            if ($response) {
+              self::logResponse($response);
+            }
+            return \GuzzleHttp\Promise\rejection_for($reason);
+          }
+        );
+      };
+    };
   }
 
 }
