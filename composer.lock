@@ -245,12 +245,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CiviCooP/exact-php-client.git",
-                "reference": "714a024529122e394211ee809d9cb920ff621427"
+                "reference": "87e9777abdad291c5f2583f4a873e09f131d89ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CiviCooP/exact-php-client/zipball/714a024529122e394211ee809d9cb920ff621427",
-                "reference": "714a024529122e394211ee809d9cb920ff621427",
+                "url": "https://api.github.com/repos/CiviCooP/exact-php-client/zipball/87e9777abdad291c5f2583f4a873e09f131d89ce",
+                "reference": "87e9777abdad291c5f2583f4a873e09f131d89ce",
                 "shasum": ""
             },
             "require": {
@@ -290,7 +290,7 @@
             "support": {
                 "source": "https://github.com/CiviCooP/exact-php-client/tree/etion"
             },
-            "time": "2021-06-03T09:26:18+00:00"
+            "time": "2021-06-03T09:45:10+00:00"
         },
         {
             "name": "psr/http-client",
