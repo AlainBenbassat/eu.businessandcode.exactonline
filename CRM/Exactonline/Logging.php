@@ -30,11 +30,22 @@ class CRM_Exactonline_Logging {
    * @param \Psr\Http\Message\RequestInterface $request
    */
   public static function logResponse(ResponseInterface $response, RequestInterface $request) {
-    $headers = '';
-    foreach ($response->getHeaders() as $name => $values) {
-      $headers .= $name . ": " . implode(", ", $values) . "\r\n";
+    $request_headers = '';
+    foreach ($request->getHeaders() as $name => $values) {
+      $request_headers .= $name . ": " . implode(", ", $values) . "\r\n";
     }
-    \CRM_Core_Error::debug_log_message('Got response ('.$response->getStatusCode().') '. $request->getUri() . ' with headers: '.$headers);
+    $response_headers = '';
+    foreach ($response->getHeaders() as $name => $values) {
+      $response_headers .= $name . ": " . implode(", ", $values) . "\r\n";
+    }
+
+    $sqlParams[1] = [time(), 'Integer'];
+    $sqlParams[2] = [$request->getUri(), 'String'];
+    $sqlParams[3] = [$request_headers, 'String'];
+    $sqlParams[4] = [$response->getStatusCode(), 'String'];
+    $sqlParams[5] = [$response_headers, 'String'];
+
+    \CRM_Core_DAO::executeQuery("INSERT INTO `civicrm_exactonline_log` (`tstamp`, `request_uri`, `request_headers`, `response_status_code`, `response_headers`) VALUES (%1, %2, %3, %4, %5)", $sqlParams);
   }
 
   /**
