@@ -45,10 +45,27 @@ class CRM_Exactonline_Logging {
     $sqlParams[4] = [$response->getStatusCode(), 'String'];
     $sqlParams[5] = [$response_headers, 'String'];
 
-    $sqlParams[6] = [$response->getHeaderLine('X-RateLimit-Limit'), 'String'];
-    $sqlParams[7] = [$response->getHeaderLine('X-RateLimit-Remaining'), 'String'];
-    $sqlParams[8] = [$response->getHeaderLine('X-RateLimit-Minutely-Limit'), 'String'];
-    $sqlParams[9] = [$response->getHeaderLine('X-RateLimit-Minutely-Remaining'), 'String'];
+    $limit = 0;
+    $remaining_limit = 0;
+    $minutely_limit = 0;
+    $remaining_minutely_limit = 0;
+    if ($response->hasHeader('X-RateLimit-Limit')) {
+      $limit = $response->getHeaderLine('X-RateLimit-Limit');
+    }
+    if ($response->hasHeader('X-RateLimit-Remaining')) {
+      $remaining_limit = $response->getHeaderLine('X-RateLimit-Remaining');
+    }
+    if ($response->hasHeader('X-RateLimit-Minutely-Limit')) {
+      $minutely_limit = $response->getHeaderLine('X-RateLimit-Minutely-Limit');
+    }
+    if ($response->hasHeader('X-RateLimit-Minutely-Remaining')) {
+      $remaining_minutely_limit = $response->getHeaderLine('X-RateLimit-Minutely-Remaining');
+    }
+
+    $sqlParams[6] = [$limit, 'Integer'];
+    $sqlParams[7] = [$remaining_limit, 'Integer'];
+    $sqlParams[8] = [$minutely_limit, 'Integer'];
+    $sqlParams[9] = [$remaining_minutely_limit, 'Integer'];
 
     \CRM_Core_DAO::executeQuery("
         INSERT INTO `civicrm_exactonline_log` (
