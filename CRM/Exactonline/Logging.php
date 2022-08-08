@@ -79,6 +79,80 @@ class CRM_Exactonline_Logging {
          `response_minutely_limit`,
          `response_remaning_minutely_limit`
        ) VALUES (%1, %2, %3, %4, %5, %6, %7, %8, %9)", $sqlParams);
+
+    // slow down when we reach the limit
+    if ($minutely_limit > 0 && $remaining_minutely_limit <= 10) {
+      sleep(3);
+    }
+  }
+
+  private static function dateMinusNumDays(&$day, $numDays) {
+    if ($numDays == 0) {
+      return;
+    }
+
+    $day->add(\DateInterval::createFromDateString('-' . $numDays . ' Day'));
+  }
+
+  public static function getLoggerSummary($numDays) {
+    $logSummary = [];
+
+    $today = new DateTime('today');
+
+    for ($i = 0; $i < $numDays; $i++) {
+      $logSummary[] = self::getLoggerSummaryForDay($today);
+      self::dateMinusNumDays($today, 1);
+    }
+
+    return $logSummary;
+  }
+
+  private static function getLoggerSummaryForDay($day) {
+    $from = $day->format('Y-m-d') . ' 00:00:00';
+    $to = $day->format('Y-m-d') . ' 23:59:59';
+
+    $sql = "
+      select
+        count(*)
+      from
+        civicrm_exactonline_log
+      where
+        request_time between '$from' and '$to'
+    ";
+
+    $sqlOK = $sql . ' and response_status_code < 300 order by id desc';
+    $sqlNotOK = $sql . ' and response_status_code >= 300 order by id desc';
+
+    $logSummary = [];
+    $logSummary['date'] = $day->format('Y-m-d');
+    $logSummary['day_month'] = $day->format('d/m');
+    $logSummary['count_ok'] = CRM_Core_DAO::singleValueQuery($sqlOK);
+    $logSummary['count_not_ok'] = CRM_Core_DAO::singleValueQuery($sqlNotOK);
+    $logSummary['count_total'] = $logSummary['count_ok'] + $logSummary['count_not_ok'];
+
+    return $logSummary;
+  }
+
+  public static function getLoggerDetail($date) {
+    $sql = "select * from civicrm_exactonline_log where date_format(request_time, '%Y-%m-%d') = '" . $date . "' order by id";
+    return CRM_Core_DAO::executeQuery($sql)->fetchAll();
+  }
+
+  public static function getError429List() {
+    $sql = "
+      select
+        date_format(request_time, '%Y-%m-%d') date,
+        count(*) num_errors
+      from
+        civicrm_exactonline_log
+      where
+        response_status_code = 429
+      group by
+        date_format(request_time, '%Y-%m-%d')
+      having
+        count(*) > 0
+    ";
+    return CRM_Core_DAO::executeQuery($sql)->fetchAll();
   }
 
   /**

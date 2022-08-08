@@ -18,4 +18,10 @@
     <title>TestSettings</title>
     <access_arguments>access CiviCRM</access_arguments>
   </item>
+  <item>
+    <path>civicrm/exactonline/viewlog</path>
+    <page_callback>CRM_Exactonline_Page_ViewLog</page_callback>
+    <title>ViewLog</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>

@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS `civicrm_exactonline_log` (
     `id` INT NOT NULL AUTO_INCREMENT ,
-    `tstamp` INT NOT NULL ,
-    `request_time` VARCHAR(255),
+    `request_time` VARCHAR(255) NOT NULL,
     `request_uri` TEXT NOT NULL ,
     `request_headers` TEXT NULL ,
     `response_status_code` VARCHAR(255) NOT NULL ,
@@ -10,5 +9,6 @@ CREATE TABLE IF NOT EXISTS `civicrm_exactonline_log` (
     `response_remaning_limit` INT NULL,
     `response_minutely_limit` INT NULL,
     `response_remaning_minutely_limit` INT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    INDEX (request_time)
 ) ENGINE = InnoDB;
