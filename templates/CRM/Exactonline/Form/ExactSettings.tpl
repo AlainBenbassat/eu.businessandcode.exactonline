@@ -4,6 +4,7 @@
     <p>Na succesvolle login met Exact Online, krijg je een authorisatiecode terug. Via de knop "Test", kan je de verbinding testen.</p>
     <p><a target="_blank" href="https://github.com/AlainBenbassat/eu.businessandcode.exactonline/blob/master/README.md">Raadpleeg de documentatie</a> voor meer informatie.</p>
     <p>Je kan ook alle opgeslagen Exact Online authorisatie- en authenticatiegegevens wissen, door "WIS ALLE GEGEVENS" aan te vinken.</p>
+  <p>Bekijk de <a href="viewlog?reset=1">request log</a>.</p>
 </div>
 
 {foreach from=$elementNames item=elementName}
