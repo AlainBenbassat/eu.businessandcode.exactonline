@@ -69,7 +69,7 @@ class CRM_Exactonline_Logging {
 
     \CRM_Core_DAO::executeQuery("
         INSERT INTO `civicrm_exactonline_log` (
-         `tstamp`,
+         `request_time`,
          `request_uri`,
          `request_headers`,
          `response_status_code`,
