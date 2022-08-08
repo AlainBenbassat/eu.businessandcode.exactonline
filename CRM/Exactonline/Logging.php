@@ -39,7 +39,7 @@ class CRM_Exactonline_Logging {
       $response_headers .= $name . ": " . implode(", ", $values) . "\r\n";
     }
 
-    $sqlParams[1] = [time(), 'Integer'];
+    $sqlParams[1] = [date('Y-m-d H:i:s'), 'String'];
     $sqlParams[2] = [$request->getUri(), 'String'];
     $sqlParams[3] = [$request_headers, 'String'];
     $sqlParams[4] = [$response->getStatusCode(), 'String'];
