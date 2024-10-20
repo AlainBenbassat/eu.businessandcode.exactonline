@@ -4,7 +4,7 @@ use CRM_Exactonline_ExtensionUtil as E;
 /**
  * Collection of upgrade steps.
  */
-class CRM_Exactonline_Upgrader extends CRM_Exactonline_Upgrader_Base {
+class CRM_Exactonline_Upgrader extends CRM_Extension_Upgrader_Base {
 
 
   public function install() {
