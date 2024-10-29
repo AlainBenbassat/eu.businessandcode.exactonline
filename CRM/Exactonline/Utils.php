@@ -29,7 +29,9 @@ class CRM_Exactonline_Utils {
     $this->exactConnection->setBaseUrl($this->exactOnlineURL);
 
     $this->exactOnlineClientID = $this->loadParam('ExactOnlineClientID', '');
+    if ($this->exactOnlineClientID) {
     $this->exactConnection->setExactClientId($this->exactOnlineClientID);
+    }
 
     $this->exactOnlineClientSecret = $this->loadParam('ExactOnlineClientSecret', '');
     $this->exactConnection->setExactClientSecret($this->exactOnlineClientSecret);
@@ -44,10 +46,14 @@ class CRM_Exactonline_Utils {
     $this->exactConnection->setRefreshToken($this->exactOnlineRefreshToken);
 
     $this->exactOnlineExpiresIn = $this->loadParam('ExactOnlineExpiresIn', '');
-    $this->exactConnection->setTokenExpires($this->exactOnlineExpiresIn);
+    if ($this->exactOnlineExpiresIn) {
+      $this->exactConnection->setTokenExpires($this->exactOnlineExpiresIn);
+    }
 
     $this->exactOnlineDivision = $this->loadParam('ExactOnlineDivision', '');
-    $this->exactConnection->setDivision($this->exactOnlineDivision);
+    if ($this->exactOnlineDivision) {
+      $this->exactConnection->setDivision($this->exactOnlineDivision);
+    }
 
     // Insert the logging class.
     $this->exactConnection->insertMiddleWare(CRM_Exactonline_Logging::loggerMiddleware());
