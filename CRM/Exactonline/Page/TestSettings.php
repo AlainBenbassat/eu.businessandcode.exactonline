@@ -36,6 +36,7 @@ class CRM_Exactonline_Page_TestSettings extends CRM_Core_Page {
       CRM_Core_Session::setStatus($e->getMessage(), 'Exact configuratietest', 'error');
     }
 
+/*
     $date = new DateTime();
     $date->modify('-30 days');
     $sqlParams[1] = [$date->getTimestamp(), 'Integer'];
@@ -49,6 +50,7 @@ class CRM_Exactonline_Page_TestSettings extends CRM_Core_Page {
       );
     }
     $this->assign('statistics', $statistics);
+*/
 
     parent::run();
   }

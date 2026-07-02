@@ -44,10 +44,14 @@ class CRM_Exactonline_Utils {
     $this->exactConnection->setRefreshToken($this->exactOnlineRefreshToken);
 
     $this->exactOnlineExpiresIn = $this->loadParam('ExactOnlineExpiresIn', '');
-    $this->exactConnection->setTokenExpires($this->exactOnlineExpiresIn);
+    if ($this->exactOnlineExpiresIn) {
+      $this->exactConnection->setTokenExpires($this->exactOnlineExpiresIn);
+    }
 
     $this->exactOnlineDivision = $this->loadParam('ExactOnlineDivision', '');
-    $this->exactConnection->setDivision($this->exactOnlineDivision);
+    if ($this->exactOnlineDivision) {
+      $this->exactConnection->setDivision($this->exactOnlineDivision);
+    }
 
     // Insert the logging class.
     $this->exactConnection->insertMiddleWare(CRM_Exactonline_Logging::loggerMiddleware());
@@ -89,6 +93,10 @@ class CRM_Exactonline_Utils {
 
   public function getDivision() {
     return $this->exactOnlineDivision;
+  }
+
+  public function getInvoicePayloadDebugEnabled() {
+    return (bool) $this->loadParam('ExactOnlineInvoicePayloadDebug', 0);
   }
 
   public function setExactOnlineURL($v) {
@@ -137,6 +145,10 @@ class CRM_Exactonline_Utils {
     $this->exactOnlineDivision = $v;
     $this->exactConnection->setDivision($v);
     $this->saveParam('ExactOnlineDivision', $v);
+  }
+
+  public function setInvoicePayloadDebugEnabled($v) {
+    $this->saveParam('ExactOnlineInvoicePayloadDebug', !empty($v) ? 1 : 0);
   }
 
   /***********************************************
