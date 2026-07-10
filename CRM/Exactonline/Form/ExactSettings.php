@@ -34,8 +34,8 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
     $this->addElement('checkbox', 'force_login', 'Login forceren');
     $elements[] = 'force_login';
 
-    $this->addElement('checkbox', 'debug_invoice_payload', 'Debug + Dry run: log payload en stuur geen factuur naar Exact');
-    $elements[] = 'debug_invoice_payload';
+    $this->addElement('checkbox', 'dryrun', 'Dry run');
+    $elements[] = 'dryrun';
 
     $this->addElement('checkbox', 'clear_settings', 'WIS ALLE GEGEVENS<br>(client id, client secret, authorisatiecode, access token... worden gewist uit CiviCRM)');
     $elements[] = 'clear_settings';
@@ -48,7 +48,7 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
     $defaults['client_id'] = $exactOL->getClientID();
     $defaults['client_secret'] = $exactOL->getClientSecret();
     $defaults['division'] = $exactOL->getDivision();
-    $defaults['debug_invoice_payload'] = $exactOL->getInvoicePayloadDebugEnabled();
+    $defaults['dryrun'] = $exactOL->getInvoicePayloadDebugEnabled();
     $this->setDefaults($defaults);
 
     // add the Test button if we have an authorization code
@@ -111,7 +111,7 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
       if (array_key_exists('division', $values)) {
         $exactOL->setDivision($values['division']);
       }
-      $exactOL->setInvoicePayloadDebugEnabled(array_key_exists('debug_invoice_payload', $values) ? $values['debug_invoice_payload'] : 0);
+      $exactOL->setInvoicePayloadDebugEnabled(array_key_exists('dryrun', $values) ? $values['dryrun'] : 0);
 
       // do we have an authorization code?
       if ($exactOL->getAuthorizationCode()) {
