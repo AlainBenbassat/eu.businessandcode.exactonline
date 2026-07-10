@@ -34,6 +34,9 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
     $this->addElement('checkbox', 'force_login', 'Login forceren');
     $elements[] = 'force_login';
 
+    $this->addElement('checkbox', 'dryrun', 'Dry run');
+    $elements[] = 'dryrun';
+
     $this->addElement('checkbox', 'clear_settings', 'WIS ALLE GEGEVENS<br>(client id, client secret, authorisatiecode, access token... worden gewist uit CiviCRM)');
     $elements[] = 'clear_settings';
 
@@ -45,6 +48,7 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
     $defaults['client_id'] = $exactOL->getClientID();
     $defaults['client_secret'] = $exactOL->getClientSecret();
     $defaults['division'] = $exactOL->getDivision();
+    $defaults['dryrun'] = $exactOL->getInvoicePayloadDebugEnabled();
     $this->setDefaults($defaults);
 
     // add the Test button if we have an authorization code
@@ -77,6 +81,7 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
       $exactOL->setAccessToken('');
       $exactOL->setExpiresIn('');
       $exactOL->setRefreshToken('');
+      $exactOL->setInvoicePayloadDebugEnabled(0);
 
       CRM_Core_Session::setStatus('De Exact Online gegevens zijn gewist.', 'Succes', 'success');
       CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/exactonline/settings', 'reset=1'));
@@ -106,6 +111,7 @@ class CRM_Exactonline_Form_ExactSettings extends CRM_Core_Form {
       if (array_key_exists('division', $values)) {
         $exactOL->setDivision($values['division']);
       }
+      $exactOL->setInvoicePayloadDebugEnabled(array_key_exists('dryrun', $values) ? $values['dryrun'] : 0);
 
       // do we have an authorization code?
       if ($exactOL->getAuthorizationCode()) {
