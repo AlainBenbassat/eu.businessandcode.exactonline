@@ -29,7 +29,9 @@ class CRM_Exactonline_Utils {
     $this->exactConnection->setBaseUrl($this->exactOnlineURL);
 
     $this->exactOnlineClientID = $this->loadParam('ExactOnlineClientID', '');
+    if ($this->exactOnlineClientID) {
     $this->exactConnection->setExactClientId($this->exactOnlineClientID);
+    }
 
     $this->exactOnlineClientSecret = $this->loadParam('ExactOnlineClientSecret', '');
     $this->exactConnection->setExactClientSecret($this->exactOnlineClientSecret);

@@ -42,10 +42,3 @@
     <p><strong>Expires in:</strong> {$expires_in}</p>
 </div>
 
-<h3>Statistieken</h3>
-
-<p>Afgelopen 30 dagen</p>
-
-{foreach from=$statistics item=item}
-  <p><strong>Statuscode {$item.status_code}</strong>: {$item.count} keer</p>
-{/foreach}
