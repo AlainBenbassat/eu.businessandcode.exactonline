@@ -97,6 +97,10 @@ class CRM_Exactonline_Utils {
     return $this->exactOnlineDivision;
   }
 
+  public function getInvoicePayloadDebugEnabled() {
+    return (bool) $this->loadParam('ExactOnlineInvoicePayloadDebug', 0);
+  }
+
   public function setExactOnlineURL($v) {
     $this->exactOnlineURL = $v;
     $this->exactConnection->setBaseUrl($v);
@@ -143,6 +147,10 @@ class CRM_Exactonline_Utils {
     $this->exactOnlineDivision = $v;
     $this->exactConnection->setDivision($v);
     $this->saveParam('ExactOnlineDivision', $v);
+  }
+
+  public function setInvoicePayloadDebugEnabled($v) {
+    $this->saveParam('ExactOnlineInvoicePayloadDebug', !empty($v) ? 1 : 0);
   }
 
   /***********************************************
