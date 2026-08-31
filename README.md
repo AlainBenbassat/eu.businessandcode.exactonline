@@ -41,6 +41,14 @@ Surf naar _https://WEBSITE_/civicrm/exactonline/settings en vul de nodige gegege
 
 Klik dan op opslaan. Je zal moeten aanmelden in Exact Online
 
+## Hulpsoftware bijwerken
+
+Deze extensie maakt gebruik van picqer/exact-php-client. Deze moet regelmatig bijgewerkt worden door in de map van de extensie het volgend commando uit te voeren:
+
+```
+composer update
+```
+
 ## Achtergrondinformatie
 
 ### Authorisatieprocedure
